@@ -1,0 +1,20 @@
+
+name: Deploy to GitHub Pages
+
+on:
+  workflow_dispatch:  # Manual trigger from the Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Use a PAT if write access fails
+          publish_dir: ./dist
+          publish_branch: gh-pages  # Default branch for GitHub Pages
